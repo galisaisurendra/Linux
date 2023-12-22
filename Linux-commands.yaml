@@ -1,0 +1,17 @@
+## TAR ##
+
+tar a folder:
+
+tar -cvzf archive_name.tar.gz folder_to_tar
+
+untar:
+
+tar -xvzf archive_name.tar.gz
+
+### Command to get VM IP ###
+
+hostname -I | cut -d' ' -f1
+
+### Find ###
+
+find / -type f -name "derby-10.14.2.0.jar" 2>/dev/null
