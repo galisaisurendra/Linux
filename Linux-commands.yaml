@@ -15,3 +15,12 @@ hostname -I | cut -d' ' -f1
 ### Find ###
 
 find / -type f -name "derby-10.14.2.0.jar" 2>/dev/null
+
+---
+Disk Usage
+
+journalctl --disk-usage  # Check disk usage by the journal
+
+sudo journalctl --rotate          # Rotate journal files
+sudo journalctl --vacuum-time=7d  # Delete archived logs older than 7 days
+
