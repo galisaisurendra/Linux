@@ -1,0 +1,22 @@
+#!/bin/bash
+
+az account set --subscription <subscriptionID>
+
+docker login -u <username> -p <password>
+
+# Define the input file containing image names
+input_file="images.yaml"
+
+# Read each line from the input file
+while IFS= read -r image_name; do
+    # Replace ':' with '-' in the image name to create the tar file name
+    tar_file_name=$(echo "$image_name" | tr '/' '-' | tr ':' '-')
+    # Pull the image
+    docker pull "$image_name"
+    # Save the image as a tar file
+    docker save "$image_name" -o $tar_file_name.tar.gz
+    chmod 777 $tar_file_name.tar.gz
+    az storage blob upload --container-name apm --file $tar_file_name.tar.gz --name v1.0/docker-images/$tar_file_name.tar.gz --account-name <storage-account-name>  --account-key <accountkey> --overwrite
+    echo "Uploaded tar file to azure blob - $tar_file_name.tar.gz"
+    rm -rf $tar_file_name.tar.gz
+done < "$input_file"
