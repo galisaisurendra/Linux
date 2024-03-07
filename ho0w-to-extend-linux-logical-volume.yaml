@@ -3,3 +3,8 @@ https://networklessons.com/uncategorized/extend-lvm-partition
 Resize fix:
 
 https://stackoverflow.com/questions/26305376/resize2fs-bad-magic-number-in-super-block-while-trying-to-open
+
+
+Remove home directory and use entire space on root:
+
+https://gist.github.com/troyfontaine/87091bd6a5c68f45dd62ced3d12bc377
