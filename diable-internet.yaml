@@ -1,0 +1,5 @@
+TO disable internet
+
+vi /etc/resolv.conf
+
+comment out nameserver details
