@@ -1,0 +1,1 @@
+sudo yumdownloader --resolve containerd.io docker-ce docker-ce-cli
