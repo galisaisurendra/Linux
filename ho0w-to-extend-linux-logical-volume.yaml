@@ -12,3 +12,58 @@ https://gist.github.com/troyfontaine/87091bd6a5c68f45dd62ced3d12bc377
 Extending single file system:
 
 https://www.linuxtechi.com/extend-lvm-partitions/#google_vignette
+
+Increase size of single disk 
+
+
+This approach is good if you're not using LVM, and the partition is the last one on the disk (which /dev/sda1 is in your case).
+
+✅ Steps:
+Check current disk and partition layout:
+
+bash
+Copy
+Edit
+lsblk
+df -h /
+Install parted if not available:
+
+bash
+Copy
+Edit
+sudo yum install parted -y  # RHEL/CentOS
+# or
+sudo apt install parted -y  # Debian/Ubuntu
+Resize partition using parted:
+
+bash
+Copy
+Edit
+sudo parted /dev/sda
+In parted shell:
+
+text
+Copy
+Edit
+(parted) print              # see current layout
+(parted) resizepart 1 100%  # grow partition 1 to use full disk
+(parted) quit
+resizepart 1 100% tells parted to grow /dev/sda1 to all available space.
+
+Resize the filesystem:
+
+bash
+Copy
+Edit
+# For ext4
+sudo resize2fs /dev/sda1
+
+# For XFS (if applicable)
+sudo xfs_growfs /
+Verify:
+
+bash
+Copy
+Edit
+df -h /
+lsblk
